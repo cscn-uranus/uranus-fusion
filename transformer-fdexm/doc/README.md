@@ -20,9 +20,9 @@ queue N ------> uranus-transformer ---> rabbitmq ---> transformer.queue1
 ### FDEXM的转换
 
 #### 原始的FDEXM报文
-- 下面是一个原始的IFPL报文, 详情参见规范[MH/T-4029.3](./docs/民用航空空中交通管制自动化系统+第3部分：飞行数据交换.pdf)
+- 下面是一个原始的IFPL报文, 详情参见规范MH/T 4029.3
 
-``` fdexm
+``` text
 ZCZC -TITLE IFPL
 -FILTIM 093903
 -SOURCE CDATC_AIRNET_ZUUU
@@ -195,6 +195,7 @@ com.uranus.transformer.fdexm
 #### stream
 与rabbitmq信道的接口和处理, 相当于消息路由, 根据AddmDTO的Title来判断是什么类型的消息, 然后使用不同的转换器变为不同的pojo, 最后再发送到不同的rabbitmq的队列中
 ``` java
+public class Processor {
   @StreamListener(FdexmTransformerChannel.INPUT)
   public void process(Message<String> fdexm) {
     String fdexmText = fdexm.getPayload();
@@ -250,12 +251,14 @@ com.uranus.transformer.fdexm
       }
     }
   }
+}
 ```
 
 ## 下一步工作
 - [x] FDEXM转换为json的静态方法
 - [x] Ifpl的转换和发送
-- [ ] 其他dom和DTO的构建和映射, 包括runway, qnh, ssr, sector......
-- [ ] 重构, 优化pojo的数据结构
-- [ ] 考虑transformer处理的时候是否应该存库
-- [ ] 考虑分离proxy的消息队列和transformer的消息队列
+- [x] 其他dom和DTO的构建和映射, 包括runway, qnh, ssr, sector......
+- [x] 重构, 优化pojo的数据结构
+- [x] 考虑transformer处理的时候是否应该存库
+  - [x] 形成了三层结构，proxy，fusion，api，详见wiki中uranus文档
+- [x] 考虑分离proxy的消息队列和transformer的消息队列
