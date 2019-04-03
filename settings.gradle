@@ -1,0 +1,10 @@
+pluginManagement {
+    repositories {
+        maven { url 'http://nexus.dizall.com/repository/maven-public/' }
+    }
+}
+
+rootProject.name = 'uranus-fusion'
+
+include 'transformer-cat62'
+include 'transformer-fdexm'
