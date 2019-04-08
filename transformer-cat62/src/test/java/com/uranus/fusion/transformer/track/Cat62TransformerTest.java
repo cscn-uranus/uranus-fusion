@@ -1,6 +1,6 @@
 package com.uranus.fusion.transformer.track;
 
-import com.uranus.fusion.transformer.asterix.Cat62Mapper;
+import com.uranus.fusion.common.asterix.Cat062Mapper;
 import com.uranus.fusion.transformer.Cat62TransformerTestApp;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,7 +30,7 @@ public class Cat62TransformerTest {
       hexString+=valueString;
     }
     String raw = hexString.toString();
-    Cat62Mapper decoder = new Cat62Mapper(data);
+    Cat062Mapper decoder = new Cat062Mapper(data);
     decoder.readValue();
   }
   private byte[] genCat1Pack() {

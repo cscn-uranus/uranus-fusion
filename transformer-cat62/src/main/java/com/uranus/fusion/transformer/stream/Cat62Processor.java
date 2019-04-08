@@ -1,9 +1,5 @@
 package com.uranus.fusion.transformer.stream;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.uranus.fusion.transformer.asterix.Cat62Mapper;
-import com.uranus.fusion.transformer.asterix.Cat62UapDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.stream.annotation.EnableBinding;
@@ -21,14 +17,14 @@ public class Cat62Processor {
   public void process(Message<byte[]> message) {
 
 //    byte[] receivedBytes= message.getPayload();
-//    Cat62Mapper mapper = new Cat62Mapper(receivedBytes);
-//    Cat62UapDTO cat62UapDTO = mapper.readValue();
+//    Cat062Mapper mapper = new Cat062Mapper(receivedBytes);
+//    FlightDTO cat62UapDTO = mapper.readValue();
 //    ObjectMapper  jsonMapper = new ObjectMapper();
 //    try {
 //      logger.info(jsonMapper.writeValueAsString(cat62UapDTO));
 //    } catch (JsonProcessingException e) {
 //      e.printStackTrace();
 //    }
-    
+
   }
 }
