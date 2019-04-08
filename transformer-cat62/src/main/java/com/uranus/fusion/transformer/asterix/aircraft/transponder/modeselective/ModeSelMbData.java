@@ -7,7 +7,7 @@ import java.util.Set;
  * ModeSelMbData
  *
  * @author 肖鹏 tellxp@github.com
- * @date 2018/10/24
+ * date 2018/10/24
  */
 public class ModeSelMbData {
 

@@ -60,7 +60,7 @@ import java.util.List;
  * AircraftDerivedDataMapper
  *
  * @author 肖鹏 tellxp@github.com
- * @date 2018/10/16
+ * date 2018/10/16
  */
 public class AircraftDerivedDataMapper {
 
@@ -74,6 +74,7 @@ public class AircraftDerivedDataMapper {
       int startIndex = fieldSpec.calculateOctetIndexByFrn(frn);
 
       AircraftDerivedData aircraftDerivedData = new AircraftDerivedData();
+
 
       DataSpec dataSpec = new DataSpec(DataSpecTypeEnum.AIRCRAFT_DERIVED_DATA);
       dataSpec.readValue(uap, startIndex);

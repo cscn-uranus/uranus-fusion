@@ -17,8 +17,19 @@ public class Cat62TransformerTest {
 
   @Test
   public void fspecTrans() {
-    byte[] data = genCat62Pack();
+    byte[] data = genRealCat62Uap();
 //    byte[] cat1 = genCat1Pack();
+
+    String hexString = "";
+    for (byte oc: data) {
+      Integer value = Byte.toUnsignedInt(oc);
+      String valueString =Integer.toHexString(value);
+      if (valueString.length()<2) {
+        valueString = "0"+valueString;
+      }
+      hexString+=valueString;
+    }
+    String raw = hexString.toString();
     Cat62Mapper decoder = new Cat62Mapper(data);
     decoder.readValue();
   }
@@ -148,7 +159,7 @@ public class Cat62TransformerTest {
         (byte)0x42
     };
   }
-  private byte[] genCat62Pack() {
+  public byte[] genSimulatedFullCat62Uap() {
 
     return new byte[] {
         (byte)0b00111110, //0
@@ -579,4 +590,103 @@ public class Cat62TransformerTest {
 
     };
   }
+
+  public static byte[] genRealCat62Uap() {
+    return new byte[] {
+      (byte)0b00111110,
+      (byte)0b00000000,
+      (byte)0b01011100,
+      (byte)0b10111111,
+      (byte)0b01001101,
+      (byte)0b00101110,
+      (byte)0b10010000,
+      (byte)0b10010000,
+      (byte)0b00000001,
+      (byte)0b01100110,
+      (byte)0b00111101,
+      (byte)0b11110000,
+      (byte)0b00000000,
+      (byte)0b01000110,
+      (byte)0b00001011,
+      (byte)0b00111110,
+      (byte)0b00000001,
+      (byte)0b00100000,
+      (byte)0b10001110,
+      (byte)0b01111110,
+      (byte)0b11111000,
+      (byte)0b01000000,
+      (byte)0b11011111,
+      (byte)0b11101011,
+      (byte)0b11110010,
+      (byte)0b10011001,
+      (byte)0b00000011,
+      (byte)0b01111010,
+      (byte)0b00000000,
+      (byte)0b10011101,
+      (byte)0b00000100,
+      (byte)0b01000111,
+      (byte)0b00000000,
+      (byte)0b00000011,
+      (byte)0b00000001,
+      (byte)0b00010001,
+      (byte)0b00000001,
+      (byte)0b00000000,
+      (byte)0b00000011,
+      (byte)0b01111111,
+      (byte)0b00000011,
+      (byte)0b01111111,
+      (byte)0b11111111,
+      (byte)0b01101111,
+      (byte)0b11011111,
+      (byte)0b10101000,
+      (byte)0b00000000,
+      (byte)0b00000000,
+      (byte)0b01000011,
+      (byte)0b01000101,
+      (byte)0b01010011,
+      (byte)0b00110101,
+      (byte)0b00111001,
+      (byte)0b00110111,
+      (byte)0b00110100,
+      (byte)0b01101000,
+      (byte)0b01000010,
+      (byte)0b00110111,
+      (byte)0b00110011,
+      (byte)0b00110111,
+      (byte)0b01001101,
+      (byte)0b01011010,
+      (byte)0b01010000,
+      (byte)0b01001101,
+      (byte)0b01010011,
+      (byte)0b01011010,
+      (byte)0b01010000,
+      (byte)0b01010000,
+      (byte)0b01010000,
+      (byte)0b00000000,
+      (byte)0b00000000,
+      (byte)0b00000101,
+      (byte)0b00001000,
+      (byte)0b00001010,
+      (byte)0b00000000,
+      (byte)0b10000000,
+      (byte)0b00010000,
+      (byte)0b00001010,
+      (byte)0b00000000,
+      (byte)0b10000000,
+      (byte)0b00111000,
+      (byte)0b00000000,
+      (byte)0b00111100,
+      (byte)0b10000000,
+      (byte)0b01000000,
+      (byte)0b00000000,
+      (byte)0b00000000,
+      (byte)0b10000000,
+      (byte)0b01010000,
+      (byte)0b00000000,
+      (byte)0b00000000,
+      (byte)0b10000000
+    };
+  }
+
+
 }

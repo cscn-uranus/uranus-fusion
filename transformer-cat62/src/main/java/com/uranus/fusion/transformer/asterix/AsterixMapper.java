@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
  * AsterixMapper
  *
  * @author 肖鹏 tellxp@github.com
- * @date 2018/10/15
+ * date 2018/10/15
  */
 public class AsterixMapper {
 

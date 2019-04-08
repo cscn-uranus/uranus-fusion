@@ -1,10 +1,12 @@
 pluginManagement {
     repositories {
-        maven { url 'http://nexus.dizall.com/repository/maven-public/' }
+//        maven { url 'http://nexus.dizall.com/repository/maven-public/' }
+        maven { url "https://plugins.gradle.org/m2/" }
     }
 }
 
 rootProject.name = 'uranus-fusion'
 
 include 'transformer-cat62'
+include 'transformer-cat48'
 include 'transformer-fdexm'

@@ -12,6 +12,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Cat62TransformerTestApp  {
 
   public static void main(String[] args) {
-    SpringApplication.run(Cat62ProcApp.class, args);
+    SpringApplication.run(Cat62TransformerTestApp.class, args);
   }
 }
