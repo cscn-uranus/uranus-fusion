@@ -1,6 +1,6 @@
 package com.uranus.fusion.transformer.track;
 
-import com.uranus.fusion.common.asterix.Cat062Mapper;
+import com.uranus.fusion.asterix.Cat062Mapper;
 import com.uranus.fusion.transformer.Cat62TransformerTestApp;
 import org.junit.Test;
 import org.junit.runner.RunWith;
