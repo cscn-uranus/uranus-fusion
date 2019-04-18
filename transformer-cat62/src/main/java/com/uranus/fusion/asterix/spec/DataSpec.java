@@ -1,34 +1,28 @@
 package com.uranus.fusion.asterix.spec;
 
-import com.uranus.fusion.asterix.util.ByteUtil;
+import com.uranus.fusion.util.ByteUtil;
+import lombok.Data;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * DataSpec
  *
- * @author 肖鹏 tellxp@github.com
- * date 2018/11/8
+ * @author 肖鹏 tellxp@github.com date 2018/11/8
  */
+@Data
 public class DataSpec {
 
-  private Map<Integer, DpIndicator> dpIndicatorMap;
-  private Map<String, DxIndicator> dxIndicatorMap;
-  private Integer size;
-  private Integer maxDrn;
-  private Integer maxDxn;
-  private Integer startIndex;
-
   private static final Logger LOGGER = LoggerFactory.getLogger(DataSpec.class);
-
   /**
-   * CAT062 data item specification
-   * ref to asterix at https://www.eurocontrol.int/services/asterix
+   * CAT062 data item specification ref to asterix at https://www.eurocontrol.int/services/asterix
    */
   private static final int AIRCRAFT_DERIVED_DATA_MAX_DRN = 28;
+
   private static final int AIRCRAFT_DERIVED_DATA_MAX_DXN = 4;
   private static final int SYSTEM_TRACK_UPDATE_AGES_MAX_DRN = 14;
   private static final int SYSTEM_TRACK_UPDATE_AGES_MAX_DXN = 2;
@@ -45,18 +39,22 @@ public class DataSpec {
   private static final int DEFAULT_MAX_DRN = 0;
   private static final int DEFAULT_MAX_DXN = 0;
 
-  /**
-   * CAT062 default parameter
-   */
+  /** CAT062 default parameter */
   private static final int DEFAULT_DP_INDICATOR_SIZE = 0;
+
   private static final DpIndicationEnum DEFAULT_DP_INDICATION = DpIndicationEnum.ABSENCE;
   private static final DxIndicationEnum DEFAULT_DX_INDICATION = DxIndicationEnum.END;
   private static final int DRN_START_NUM = 1;
   private static final int DXN_START_NUM = 1;
   private static final int DRN_OCTET_SIZE = 7;
   private static final String DX_PREFIX = "dx";
-
   private static final String ZERO_BIT = "0";
+  private Map<Integer, DpIndicator> dpIndicatorMap;
+  private Map<String, DxIndicator> dxIndicatorMap;
+  private Integer size;
+  private Integer maxDrn;
+  private Integer maxDxn;
+  private Integer startIndex;
 
   public DataSpec(DataSpecTypeEnum type) {
     doConfig(type);
@@ -66,36 +64,37 @@ public class DataSpec {
   public DpIndicator getDpIndicator(int drn) {
     return this.dpIndicatorMap.get(drn);
   }
+
   private void doConfig(DataSpecTypeEnum type) {
     this.dpIndicatorMap = new HashMap<>();
     this.dxIndicatorMap = new HashMap<>();
 
     switch (type) {
-      case AIRCRAFT_DERIVED_DATA:
+      case CAT062_AIRCRAFT_DERIVED_DATA:
         this.maxDrn = AIRCRAFT_DERIVED_DATA_MAX_DRN;
         this.maxDxn = AIRCRAFT_DERIVED_DATA_MAX_DXN;
         break;
-      case SYSTEM_TRACK_UPDATE_AGES:
+      case CAT062_SYSTEM_TRACK_UPDATE_AGES:
         this.maxDrn = SYSTEM_TRACK_UPDATE_AGES_MAX_DRN;
         this.maxDxn = SYSTEM_TRACK_UPDATE_AGES_MAX_DXN;
         break;
-      case TRACK_DATA_AGES:
+      case CAT062_TRACK_DATA_AGES:
         this.maxDrn = TRACK_DATA_AGES_MAX_DRN;
         this.maxDxn = TRACK_DATA_AGES_MAX_DXN;
         break;
-      case FLIGHT_PLAN_RELATED_DATA:
+      case CAT062_FLIGHT_PLAN_RELATED_DATA:
         this.maxDrn = FLIGHT_PLAN_RELATED_DATA_MAX_DRN;
         this.maxDxn = FLIGHT_PLAN_RELATED_DATA_MAX_DXN;
         break;
-      case MODE5_EXTENDED_MODE1_DATA:
+      case CAT062_MODE5_EXTENDED_MODE1_DATA:
         this.maxDrn = MODE5_EXTENDED_MODE1_DATA_MAX_DRN;
         this.maxDxn = MODE5_EXTENDED_MODE1_DATA_MAX_DXN;
         break;
-      case ESTIMATED_ACCURACY:
+      case CAT062_ESTIMATED_ACCURACY:
         this.maxDrn = ESTIMATED_ACCURACY_MAX_DRN;
         this.maxDxn = ESTIMATED_ACCURACY_MAX_DXN;
         break;
-      case MEASURED_INFORMATION:
+      case CAT062_MEASURED_INFORMATION:
         this.maxDrn = MEASURED_INFORMATION_MAX_DRN;
         this.maxDxn = MEASURED_INFORMATION_MAX_DXN;
         break;
@@ -145,7 +144,7 @@ public class DataSpec {
         DpIndicator dpIndicator = this.dpIndicatorMap.get(dpIndicatorDrn);
 
         dpIndicator.setIndication(
-          ZERO_BIT.equals(dpIndicatorIndicationBit)
+            ZERO_BIT.equals(dpIndicatorIndicationBit)
                 ? DpIndicationEnum.ABSENCE
                 : DpIndicationEnum.PRESENCE);
       }
@@ -156,7 +155,7 @@ public class DataSpec {
 
       DxIndicator dxIndicator = this.dxIndicatorMap.get(dxIndicatorDxn);
       dxIndicator.setIndication(
-        ZERO_BIT.equals(dxIndicatorIndicationBit)
+          ZERO_BIT.equals(dxIndicatorIndicationBit)
               ? DxIndicationEnum.END
               : DxIndicationEnum.EXTENSION);
 

@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * <p>测试的入口
  */
 @SpringBootApplication
-public class Cat62TransformerTestApp  {
+public class Cat62TransformerTestApp {
 
   public static void main(String[] args) {
     SpringApplication.run(Cat62TransformerTestApp.class, args);

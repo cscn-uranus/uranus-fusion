@@ -1,7 +1,5 @@
 package com.uranus.fusion.transformer.cat48;
 
-import com.google.common.base.Strings;
-import com.google.common.primitives.Bytes;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -11,12 +9,12 @@ public class Cat48Mapper {
   @Scheduled(fixedRate = 1000)
   public void proc() {
     String hexString =
-        "30003bfff702460c707ffba01f0de12b24470337e01303b8780eb6545072cb2d200297100030a400004080105b2fe00cb95000260784061b4620f5";
-    byte[] value = new byte[100];
-    int index=0;
-    for (int i = 0; i<hexString.length();i=i+2) {
-      String octectString = hexString.substring(i,i+2);
-      value[index] = (byte)Integer.parseInt(octectString,16);
+        "3e01efbf7da460650016bb0000555520013f4340186d70feecdefd70fe690fe3000c41f4db9d60ef07f14c780d590c41f4db9d60b0d901b404b404b40014000500000000abe006a600000112005b0b1f01010146f004b40000bf7da460650016bb0000554fa0013fcf4018ff08fef0f0fda2fdb400cf001c34b6d76da0ef07f14c78089a1c34b6d76da0ab2a01be03b003b0ffd2000000640000a35a074a00000137005a018d01010146f003b00000bf4da460650016bb00005b0480013f454017ef4a05b2a2feb0fd230604052b0101015efc05040000bf4da460650016bb0000610460013d968015b8860cb90dfcbdff5c0cd104aa0101015ef004b40000bf4da460650016bb00006369a0013e36a01621320f9f7bfd1dfdfb0cfd095c0101015ef003b00000bf4da460650016bb000063b180013f57801735e9100b8b02bc02010804087f0101015ef004dc0000bf4da460650016bb0000674ba0014157c018cdbf1481ab0275fc58003c05220101015efc057c0000bf4da460650016bb0000688ea00140ac2018074115f51c0172fc07003d0b2c0101015ef0057c0000bf4da460650016bb0000402f20013ee9e019c6a8e5ae4ffd21fed705e003ff0101015ef005540000bf4da460650016bb00004b0c6001400ec01a2649f2bc24fe76fd89020a04a40101015ef80394ff4f";
+    byte[] value = new byte[1500];
+    int index = 0;
+    for (int i = 0; i < hexString.length(); i = i + 2) {
+      String octectString = hexString.substring(i, i + 2);
+      value[index] = (byte) Integer.parseInt(octectString, 16);
       index++;
     }
     System.out.println("debug");

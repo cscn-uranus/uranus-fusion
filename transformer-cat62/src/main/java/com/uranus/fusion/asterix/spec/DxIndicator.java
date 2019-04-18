@@ -1,29 +1,15 @@
 package com.uranus.fusion.asterix.spec;
 
+import lombok.Data;
+
 /**
  * DxIndicator
  *
- * @author 肖鹏 tellxp@github.com
- * @date 2018/10/24
+ * @author 肖鹏 tellxp@github.com date 2018/10/24
  */
+@Data
 public class DxIndicator {
 
   private String dxn;
   private DxIndicationEnum indication;
-
-  public String getDxn() {
-    return dxn;
-  }
-
-  public void setDxn(String fxn) {
-    this.dxn = fxn;
-  }
-
-  public DxIndicationEnum getIndication() {
-    return indication;
-  }
-
-  public void setIndication(DxIndicationEnum indication) {
-    this.indication = indication;
-  }
 }

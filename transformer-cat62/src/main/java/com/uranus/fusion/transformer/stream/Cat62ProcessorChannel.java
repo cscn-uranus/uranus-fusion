@@ -8,8 +8,6 @@ import org.springframework.stereotype.Component;
 public interface Cat62ProcessorChannel {
   String INPUT = "cat62-processor-input";
 
-
   @Input(INPUT)
   SubscribableChannel cat62();
-
 }

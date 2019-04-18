@@ -3,8 +3,7 @@ package com.uranus.fusion.asterix.spec;
 /**
  * FieldSpecTypeEnum
  *
- * @author 肖鹏 tellxp@github.com
- * date 2019/10/15
+ * @author 肖鹏 tellxp@github.com date 2019/10/15
  */
 public enum FieldSpecTypeEnum {
   // type

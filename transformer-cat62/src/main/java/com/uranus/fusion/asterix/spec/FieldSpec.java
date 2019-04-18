@@ -1,6 +1,8 @@
 package com.uranus.fusion.asterix.spec;
 
-import com.uranus.fusion.asterix.util.ByteUtil;
+import com.uranus.fusion.asterix.AsterixConfig;
+import com.uranus.fusion.util.ByteUtil;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -12,14 +14,8 @@ import java.util.Map;
  *
  * @author 肖鹏 tellxp@github.com date 2018/10/16
  */
+@Data
 public class FieldSpec implements Serializable {
-
-  private Map<Integer, FpIndicator> fpIndicatorMap;
-  private Map<String, FxIndicator> fxIndicatorMap;
-  private Integer size;
-  private Integer maxFrn;
-  private Integer maxFxn;
-  private Integer startIndex;
 
   private static final Integer CAT001_MAX_FRN = 28;
   private static final Integer CAT001_MAX_FXN = 4;
@@ -33,7 +29,6 @@ public class FieldSpec implements Serializable {
   private static final Integer CAT062_MAX_FXN = 5;
   private static final Integer DEFAULT_MAX_FRN = 0;
   private static final Integer DEFAULT_MAX_FXN = 0;
-
   private static final int DEFAULT_FP_INDICATOR_SIZE = 0;
   private static final FpIndicationEnum DEFAULT_FP_INDICATION = FpIndicationEnum.ABSENCE;
   private static final FxIndicationEnum DEFAULT_FX_INDICATION = FxIndicationEnum.END;
@@ -42,8 +37,12 @@ public class FieldSpec implements Serializable {
   private static final int FXN_START_NUM = 1;
   private static final int FXN_OCTET_INDEX = 7;
   private static final String FX_PREFIX = "fx";
-
   private static final String ZERO_BIT = "0";
+  private Map<Integer, FpIndicator> fpIndicatorMap;
+  private Map<String, FxIndicator> fxIndicatorMap;
+  private Integer size;
+  private Integer maxFrn;
+  private Integer maxFxn;
 
   public FieldSpec(FieldSpecTypeEnum type) {
     this.doConfig(type);
@@ -120,9 +119,9 @@ public class FieldSpec implements Serializable {
     }
   }
 
-  public int calculateOctetIndexByFrn(int frn) {
+  public int calculateIndexByFrn(int frn) {
     // 初始的index为FpSpecStartIndex+FpSpecSize，即第一个field的index
-    int index = this.startIndex + this.size;
+    int index = AsterixConfig.ASTERIX_FSPEC_INDEX + this.size;
     for (int i = FRN_START_NUM; i < frn; i++) {
       FpIndicator fpIndicator = this.getFpIndicator(i);
 
@@ -135,14 +134,13 @@ public class FieldSpec implements Serializable {
     return index;
   }
 
-  public void readValue(List<Byte> uapOctetList, int start) {
+  public void readValue(List<Byte> input, int beginIndex) {
 
     int sizeCount = 0;
-    int index = start;
-    this.startIndex = start;
+    int currentIndex = beginIndex;
 
     for (int i = 0; i < this.maxFxn; i++) {
-      Byte fieldSpecificationOctet = uapOctetList.get(index);
+      Byte fieldSpecificationOctet = input.get(currentIndex);
       for (int j = 0; j < FRN_OCTET_SIZE; j++) {
         // set f1-f7
         int fpIndicatorFrn = i * FRN_OCTET_SIZE + j + FRN_START_NUM;
@@ -166,7 +164,7 @@ public class FieldSpec implements Serializable {
               : FxIndicationEnum.EXTENSION);
 
       sizeCount++;
-      index++;
+      currentIndex++;
       this.size = sizeCount;
 
       if (fxIndicator.getIndication().equals(FxIndicationEnum.END)) {
