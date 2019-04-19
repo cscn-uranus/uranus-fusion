@@ -1,5 +1,6 @@
 package com.uranus.fusion.asterix.cat062;
 
+import com.uranus.fusion.asterix.cat062.config.Cat062Config;
 import com.uranus.fusion.asterix.spec.FieldSpec;
 import com.uranus.fusion.asterix.spec.FpIndicationEnum;
 import com.uranus.fusion.asterix.spec.FpIndicator;
@@ -17,14 +18,13 @@ import java.util.List;
 public class VehicleFleetIdentificationMapper {
 
   public static VehicleFleetIdentification read(List<Byte> uap, FieldSpec fieldSpec) {
-    final int frn = 23;
-    final int size = 1;
 
-    FpIndicator fpIndicator = fieldSpec.getFpIndicator(frn);
+    FpIndicator fpIndicator =
+        fieldSpec.getFpIndicator(Cat062Config.VEHICLE_FLEET_IDENTIFICATION_FRN);
     if (fpIndicator.getIndication().equals(FpIndicationEnum.PRESENCE)) {
-      fpIndicator.setSize(size);
+      fpIndicator.setSize(Cat062Config.VEHICLE_FLEET_IDENTIFICATION_SIZE);
 
-      int index = fieldSpec.calculateIndexByFrn(frn);
+      int index = fieldSpec.calculateIndexByFrn(Cat062Config.VEHICLE_FLEET_IDENTIFICATION_FRN);
 
       VehicleFleetIdentification vehicleFleetIdentification = new VehicleFleetIdentification();
 

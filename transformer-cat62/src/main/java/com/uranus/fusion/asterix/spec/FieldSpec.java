@@ -121,7 +121,7 @@ public class FieldSpec implements Serializable {
 
   public int calculateIndexByFrn(int frn) {
     // 初始的index为FpSpecStartIndex+FpSpecSize，即第一个field的index
-    int index = AsterixConfig.ASTERIX_FSPEC_INDEX + this.size;
+    int index = AsterixConfig.ASTERIX_FIRST_FSPEC_INDEX + this.size;
     for (int i = FRN_START_NUM; i < frn; i++) {
       FpIndicator fpIndicator = this.getFpIndicator(i);
 

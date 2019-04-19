@@ -29,7 +29,7 @@ public class TrackStatusMapper {
 
   public static TrackStatus readTrackStatus(List<Byte> uap, FieldSpec fieldSpec) {
 
-    int sizeCount = 1;
+    int sizeCount = Cat062Config.TRACK_STATUS_EX_SIZE;
 
     FpIndicator fpIndicator = fieldSpec.getFpIndicator(Cat062Config.TRACK_STATUS_FRN);
     if (fpIndicator.getIndication().equals(FpIndicationEnum.PRESENCE)) {

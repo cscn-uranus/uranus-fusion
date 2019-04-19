@@ -1,5 +1,6 @@
 package com.uranus.fusion.asterix.cat062;
 
+import com.uranus.fusion.asterix.cat062.config.Cat062Config;
 import com.uranus.fusion.asterix.spec.FieldSpec;
 import com.uranus.fusion.asterix.spec.FpIndicationEnum;
 import com.uranus.fusion.asterix.spec.FpIndicator;
@@ -16,15 +17,12 @@ import java.util.List;
 public class ComposedTrackNumberMapper {
 
   public static ComposedTrackNumber read(List<Byte> uap, FieldSpec fieldSpec) {
-    final int frn = 26;
-    final String zeroBit = "0";
-    final int indexStep = 3;
-    int size = 3;
 
-    FpIndicator fpIndicator = fieldSpec.getFpIndicator(frn);
+    FpIndicator fpIndicator = fieldSpec.getFpIndicator(Cat062Config.COMPOSED_TRACK_NUMBER_FRN);
     if (fpIndicator.getIndication().equals(FpIndicationEnum.PRESENCE)) {
 
-      int index = fieldSpec.calculateIndexByFrn(frn);
+      int index = fieldSpec.calculateIndexByFrn(Cat062Config.COMPOSED_TRACK_NUMBER_FRN);
+      int sizeCount = 0;
       ComposedTrackNumber composedTrackNumber = new ComposedTrackNumber();
 
       StringBuilder systemUniIdentificationBuilder = new StringBuilder();
@@ -40,13 +38,13 @@ public class ComposedTrackNumberMapper {
         systemTrackNumberBuilder.append(stnBits);
 
         String fx = ByteUtil.toString(uap.get(index + 2)).substring(7, 8);
-        if (zeroBit.equals(fx)) {
+        if (ByteUtil.ZERO_BIT.equals(fx)) {
           break;
         }
-        size += indexStep;
-        index += indexStep;
+        sizeCount += Cat062Config.COMPOSED_TRACK_NUMBER_EX_SIZE;
+        index += Cat062Config.COMPOSED_TRACK_NUMBER_EX_SIZE;
       }
-      fpIndicator.setSize(size);
+      fpIndicator.setSize(sizeCount);
 
       composedTrackNumber.setSystemUnitIdentification(systemUniIdentificationBuilder.toString());
       composedTrackNumber.setSystemTrackNumber(systemTrackNumberBuilder.toString());

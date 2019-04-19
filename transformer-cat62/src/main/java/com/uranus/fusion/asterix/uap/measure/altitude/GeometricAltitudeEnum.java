@@ -6,7 +6,7 @@ package com.uranus.fusion.asterix.uap.measure.altitude;
  * @author 肖鹏 tellxp@github.com date 2018/10/26
  */
 public enum GeometricAltitudeEnum {
-  // from aircraft
+  // from aircraftdata
   AIRCRAFT_DERIVED,
   CALCULATED
 }

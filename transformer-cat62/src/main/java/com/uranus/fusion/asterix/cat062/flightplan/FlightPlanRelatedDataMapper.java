@@ -1,6 +1,7 @@
 package com.uranus.fusion.asterix.cat062.flightplan;
 
 import com.uranus.fusion.asterix.cat062.config.Cat062Config;
+import com.uranus.fusion.asterix.cat062.flightplan.sub.*;
 import com.uranus.fusion.asterix.spec.*;
 import com.uranus.fusion.asterix.uap.emitter.mode3.PreEmergencyMode3;
 import com.uranus.fusion.asterix.uap.flightplan.*;
@@ -40,31 +41,29 @@ public class FlightPlanRelatedDataMapper {
       FlightCategory flightCategory = FlightCategoryMapper.read(uap, dataSpec);
       flightPlanRelatedData.setFlightCategory(flightCategory);
 
-      AircraftType aircraftType = AircraftTypeMapper.read(uap, dataSpec);
+      AircraftType aircraftType = TypeOfAircraftMapper.read(uap, dataSpec);
       flightPlanRelatedData.setAircraftType(aircraftType);
 
       WakeTurbulenceCategory wakeTurbulenceCategory =
-          WakeTurbulenceCategoryMapper.readDepartureAirport(uap, dataSpec);
+          WakeTurbulenceCategoryMapper.read(uap, dataSpec);
       flightPlanRelatedData.setWakeTurbulenceCategory(wakeTurbulenceCategory);
 
-      DepartureAerodrome departureAerodrome =
-          DepartureAerodromeMapper.readDepartureAirport(uap, dataSpec);
+      DepartureAerodrome departureAerodrome = DepartureAirportMapper.read(uap, dataSpec);
       flightPlanRelatedData.setDepartureAerodrome(departureAerodrome);
 
-      DestinationAerodrome destinationAerodrome =
-          DestinationAerodromeMapper.readDestinationAirport(uap, dataSpec);
+      DestinationAerodrome destinationAerodrome = DestinationAirportMapper.read(uap, dataSpec);
       flightPlanRelatedData.setDestinationAerodrome(destinationAerodrome);
 
-      Runway runwayDesignation = RunwayMapper.read(uap, dataSpec);
+      Runway runwayDesignation = RunwayDesignationMapper.read(uap, dataSpec);
       flightPlanRelatedData.setRunwayDesignation(runwayDesignation);
 
       FlightLevel currentClearedFlightLevel = CurrentClearedFlightLevelMapper.read(uap, dataSpec);
       flightPlanRelatedData.setCurrentClearedFlightLevel(currentClearedFlightLevel);
 
-      ControlPosition currentControlPosition = ControlPositionMapper.read(uap, dataSpec);
+      ControlPosition currentControlPosition = CurrentControlPositionMapper.read(uap, dataSpec);
       flightPlanRelatedData.setCurrentControlPosition(currentControlPosition);
 
-      FlightPlanTimeData flightPlanTimeData = FlightPlanTimeDataMapper.read(uap, dataSpec);
+      FlightPlanTimeData flightPlanTimeData = TimeOfDepartureOrArrivalMapper.read(uap, dataSpec);
       flightPlanRelatedData.setFlightPlanTimeData(flightPlanTimeData);
 
       AircraftStand aircraftStand = AircraftStandMapper.read(uap, dataSpec);
@@ -74,11 +73,11 @@ public class FlightPlanRelatedDataMapper {
       flightPlanRelatedData.setStandStatus(standStatus);
 
       StandardInstrumentDeparture standardInstrumentDeparture =
-          FlightProcedureMapper.readDeparture(uap, dataSpec);
+          StandardInstrumentDepartureMapper.read(uap, dataSpec);
       flightPlanRelatedData.setStandardInstrumentDeparture(standardInstrumentDeparture);
 
       StandardInstrumentArrival standardInstrumentArrival =
-          FlightProcedureMapper.readArrival(uap, dataSpec);
+          StandardInstrumentArrivalMapper.read(uap, dataSpec);
       flightPlanRelatedData.setStandardInstrumentArrival(standardInstrumentArrival);
 
       PreEmergencyMode3 preEmergencyMode3 = PreEmergencyMode3Mapper.read(uap, dataSpec);

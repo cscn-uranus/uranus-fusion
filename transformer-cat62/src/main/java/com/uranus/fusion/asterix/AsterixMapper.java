@@ -23,10 +23,10 @@ public class AsterixMapper {
         message.get(AsterixConfig.ASTERIX_LENGTH_INDEX + AsterixConfig.ASTERIX_LENGTH_SIZE - 1));
   }
 
-  public static FieldSpec readFieldSpec(List<Byte> message) {
+  public static FieldSpec readFieldSpec(List<Byte> message, int beginIndex) {
     FieldSpec fieldSpec = new FieldSpec(FieldSpecTypeEnum.CAT062);
 
-    fieldSpec.readValue(message, AsterixConfig.ASTERIX_FSPEC_INDEX);
+    fieldSpec.readValue(message, beginIndex);
     return fieldSpec;
   }
 }

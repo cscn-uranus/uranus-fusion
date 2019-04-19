@@ -3,9 +3,12 @@ package com.uranus.fusion.asterix.cat062;
 import com.uranus.fusion.asterix.AsterixConfig;
 import com.uranus.fusion.asterix.AsterixMapper;
 import com.uranus.fusion.asterix.UserAccessProfile;
-import com.uranus.fusion.asterix.cat062.aircraft.AircraftDerivedDataMapper;
+import com.uranus.fusion.asterix.cat062.accuracy.EstimatedAccuracyMapper;
+import com.uranus.fusion.asterix.cat062.aircraftdata.AircraftDerivedDataMapper;
 import com.uranus.fusion.asterix.cat062.dataage.TrackDataAgeMapper;
 import com.uranus.fusion.asterix.cat062.flightplan.FlightPlanRelatedDataMapper;
+import com.uranus.fusion.asterix.cat062.measured.MeasuredInformationMapper;
+import com.uranus.fusion.asterix.cat062.mode5.Mode5AndMode1Mapper;
 import com.uranus.fusion.asterix.cat062.updateage.SystemTrackUpdateAgeMapper;
 import com.uranus.fusion.asterix.spec.FieldSpec;
 import com.uranus.fusion.asterix.spec.FpIndicationEnum;
@@ -15,7 +18,7 @@ import com.uranus.fusion.asterix.uap.aircraft.AircraftDerivedData;
 import com.uranus.fusion.asterix.uap.datainfo.MeasuredInformation;
 import com.uranus.fusion.asterix.uap.emitter.mode2.Mode2Code;
 import com.uranus.fusion.asterix.uap.emitter.mode3.Mode3Code;
-import com.uranus.fusion.asterix.uap.emitter.mode5.Mode5AndExtendedMode1Data;
+import com.uranus.fusion.asterix.uap.emitter.mode5.Mode5AndExtendedMode1;
 import com.uranus.fusion.asterix.uap.flightplan.FlightPlanRelatedData;
 import com.uranus.fusion.asterix.uap.identification.ServiceIdentification;
 import com.uranus.fusion.asterix.uap.identification.SystemIdentification;
@@ -83,7 +86,7 @@ public class Cat062Mapper {
   }
 
   private void readFSPEC() {
-    FieldSpec fieldSpec = AsterixMapper.readFieldSpec(this.message);
+    FieldSpec fieldSpec = AsterixMapper.readFieldSpec(this.message,AsterixConfig.ASTERIX_FIRST_FSPEC_INDEX);
     for (int frn : SPARE_FRN) {
       FpIndicator fpIndicator = fieldSpec.getFpIndicator(frn);
       if (FpIndicationEnum.PRESENCE == fpIndicator.getIndication()) {
@@ -143,8 +146,7 @@ public class Cat062Mapper {
   }
 
   private void readTrackMode3ACode() {
-    Mode3Code trackMode3Code =
-        TrackMode3ACodeMapper.readTrackMode3Code(this.message, this.uap.getFieldSpec());
+    Mode3Code trackMode3Code = TrackMode3ACodeMapper.read(this.message, this.uap.getFieldSpec());
     this.uap.setMode3Code(trackMode3Code);
   }
 
@@ -156,7 +158,7 @@ public class Cat062Mapper {
 
   private void readAircraftDerivedData() {
     AircraftDerivedData aircraftDerivedData =
-        AircraftDerivedDataMapper.readAircraftDerivedData(this.message, this.uap.getFieldSpec());
+        AircraftDerivedDataMapper.read(this.message, this.uap.getFieldSpec());
     this.uap.setAircraftDerivedData(aircraftDerivedData);
   }
 
@@ -185,8 +187,7 @@ public class Cat062Mapper {
   }
 
   private void readTrackDataAges() {
-    TrackDataAge trackDataAge =
-        TrackDataAgeMapper.read(this.message, this.uap.getFieldSpec());
+    TrackDataAge trackDataAge = TrackDataAgeMapper.read(this.message, this.uap.getFieldSpec());
     this.uap.setTrackDataAge(trackDataAge);
   }
 
@@ -198,19 +199,19 @@ public class Cat062Mapper {
 
   private void readCalculatedTrackGeometricAltitude() {
     GeometricAltitude trackGeometricAltitude =
-        TrackGeometricAltitudeMapper.read(this.message, this.uap.getFieldSpec());
+        CalculatedTrackGeometricAltitudeMapper.read(this.message, this.uap.getFieldSpec());
     this.uap.setTrackGeometricAltitude(trackGeometricAltitude);
   }
 
   private void readCalculatedTrackBarometricAltitude() {
     BarometricAltitude trackBarometricAltitude =
-        TrackBarometricAltitudeMapper.read(this.message, this.uap.getFieldSpec());
+        CalculatedTrackBarometricAltitudeMapper.read(this.message, this.uap.getFieldSpec());
     this.uap.setTrackBarometricAltitude(trackBarometricAltitude);
   }
 
   private void readCalculatedRateOfClimbDescent() {
     RateOfClimbOrDescent rateOfClimbOrDescent =
-        RateOfClimbOrDescentMapper.read(this.message, this.uap.getFieldSpec());
+        CalculatedRateOfClimbOrDescentMapper.read(this.message, this.uap.getFieldSpec());
     this.uap.setRateOfClimbOrDescent(rateOfClimbOrDescent);
   }
 
@@ -233,13 +234,13 @@ public class Cat062Mapper {
   }
 
   private void readMode5DataReportsAndExtendedMode1Code() {
-    Mode5AndExtendedMode1Data mode5AndExtendedMode1Data =
-        Mode5AndExtendedMode1DataMapper.read(this.message, this.uap.getFieldSpec());
-    this.uap.setMode5AndExtendedMode1Data(mode5AndExtendedMode1Data);
+    Mode5AndExtendedMode1 mode5AndExtendedMode1 =
+        Mode5AndMode1Mapper.read(this.message, this.uap.getFieldSpec());
+    this.uap.setMode5AndExtendedMode1(mode5AndExtendedMode1);
   }
 
   private void readTrackMode2Code() {
-    Mode2Code mode2Code = Mode2CodeMapper.read(this.message, this.uap.getFieldSpec());
+    Mode2Code mode2Code = TrackMode2CodeMapper.read(this.message, this.uap.getFieldSpec());
     this.uap.setMode2Code(mode2Code);
   }
 

@@ -13,5 +13,5 @@ public class AsterixConfig {
   public static final Integer ASTERIX_LENGTH_INDEX = ASTERIX_CATEGORY_INDEX + ASTERIX_CATEGORY_SIZE;
   public static final Integer ASTERIX_LENGTH_SIZE = 2;
 
-  public static final Integer ASTERIX_FSPEC_INDEX = ASTERIX_LENGTH_INDEX + ASTERIX_LENGTH_SIZE;
+  public static final Integer ASTERIX_FIRST_FSPEC_INDEX = ASTERIX_LENGTH_INDEX + ASTERIX_LENGTH_SIZE;
 }

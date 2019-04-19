@@ -18,6 +18,6 @@ public enum TargetIdentificationEnum {
   // Invalid
   INVALID,
 
-  // Target Identification is in aircraft derived data
+  // Target Identification is in aircraftdata derived data
   AIRCRAFT_DERIVED
 }

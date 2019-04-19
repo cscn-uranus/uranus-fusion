@@ -9,7 +9,7 @@ import com.uranus.fusion.asterix.uap.emitter.mode3.CodeGarbledStatusEnum;
 import com.uranus.fusion.asterix.uap.emitter.mode3.CodeValidatedStatusEnum;
 import com.uranus.fusion.asterix.uap.emitter.mode3.Mode3Code;
 import com.uranus.fusion.util.ByteUtil;
-import com.uranus.fusion.util.IntegerUtil;
+import com.uranus.fusion.util.StringUtil;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class TrackMode3ACodeMapper {
 
-  public static Mode3Code readTrackMode3Code(List<Byte> uapOctetList, FieldSpec fieldSpec) {
+  public static Mode3Code read(List<Byte> uapOctetList, FieldSpec fieldSpec) {
 
     // Track Mode 3/A Code: frn=9, size=2
     FpIndicator fpIndicator = fieldSpec.getFpIndicator(Cat062Config.TRACK_MODE_3A_CODE_FRN);
@@ -49,35 +49,13 @@ public class TrackMode3ACodeMapper {
               ? CodeChangeStatusEnum.NO_CHANGE
               : CodeChangeStatusEnum.CHANGED);
 
-      String codeABinaryString =
-          ByteUtil.getBitByIndex(uapOctetList.get(index), 4)
-              + ByteUtil.getBitByIndex(uapOctetList.get(index), 5)
-              + ByteUtil.getBitByIndex(uapOctetList.get(index), 6);
-      Byte codeAByte = ByteUtil.valueOf(codeABinaryString);
-      String codeA = String.valueOf(IntegerUtil.valueOf(codeAByte));
+      String codeBits =
+          ByteUtil.toString(uapOctetList.get(index)).substring(4, 7)
+              + ByteUtil.toString(uapOctetList.get(index + 1));
 
-      String codeBBinaryString =
-          ByteUtil.getBitByIndex(uapOctetList.get(index), 7)
-              + ByteUtil.getBitByIndex(uapOctetList.get(index + 1), 0)
-              + ByteUtil.getBitByIndex(uapOctetList.get(index + 1), 1);
-      Byte codeBByte = ByteUtil.valueOf(codeBBinaryString);
-      String codeB = String.valueOf(IntegerUtil.valueOf(codeBByte));
+      String code = StringUtil.valueOf(codeBits, 3);
 
-      String codeCBinaryString =
-          ByteUtil.getBitByIndex(uapOctetList.get(index + 1), 2)
-              + ByteUtil.getBitByIndex(uapOctetList.get(index + 1), 3)
-              + ByteUtil.getBitByIndex(uapOctetList.get(index + 1), 4);
-      Byte codeCByte = ByteUtil.valueOf(codeCBinaryString);
-      String codeC = String.valueOf(IntegerUtil.valueOf(codeCByte));
-
-      String codeDBinaryString =
-          ByteUtil.getBitByIndex(uapOctetList.get(index + 1), 5)
-              + ByteUtil.getBitByIndex(uapOctetList.get(index + 1), 6)
-              + ByteUtil.getBitByIndex(uapOctetList.get(index + 1), 7);
-      Byte codeDByte = ByteUtil.valueOf(codeDBinaryString);
-      String codeD = String.valueOf(IntegerUtil.valueOf(codeDByte));
-
-      mode3Code.setCode(codeA + codeB + codeC + codeD);
+      mode3Code.setCode(code);
       return mode3Code;
     }
     return null;

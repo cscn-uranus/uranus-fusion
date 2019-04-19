@@ -1,5 +1,6 @@
 package com.uranus.fusion.asterix.cat062;
 
+import com.uranus.fusion.asterix.cat062.config.Cat062Config;
 import com.uranus.fusion.asterix.spec.FieldSpec;
 import com.uranus.fusion.asterix.spec.FpIndicationEnum;
 import com.uranus.fusion.asterix.spec.FpIndicator;
@@ -18,13 +19,11 @@ import java.util.List;
 public class TargetSizeAndOrientationMapper {
 
   public static TargetSizeAndOrientation read(List<Byte> uap, FieldSpec fieldSpec) {
-    final int frn = 22;
-    final String zeroBit = "0";
-
-    int size = 1;
-    FpIndicator fpIndicator = fieldSpec.getFpIndicator(frn);
+    FpIndicator fpIndicator =
+        fieldSpec.getFpIndicator(Cat062Config.TARGET_SIZE_AND_ORIENTATION_FRN);
     if (fpIndicator.getIndication().equals(FpIndicationEnum.PRESENCE)) {
-      int index = fieldSpec.calculateIndexByFrn(frn);
+      int sizeCount = Cat062Config.TARGET_SIZE_AND_ORIENTATION_EX_SIZE;
+      int index = fieldSpec.calculateIndexByFrn(Cat062Config.TARGET_SIZE_AND_ORIENTATION_FRN);
 
       TargetSizeAndOrientation targetSizeAndOrientation = new TargetSizeAndOrientation();
 
@@ -32,12 +31,12 @@ public class TargetSizeAndOrientationMapper {
       int length = IntegerUtil.valueOf(ByteUtil.valueOf(lengthBits));
       targetSizeAndOrientation.setLength(length);
       String fx0Bit = ByteUtil.toString(uap.get(index)).substring(7, 8);
-      if (zeroBit.equals(fx0Bit)) {
-        fpIndicator.setSize(size);
+      if (ByteUtil.ZERO_BIT.equals(fx0Bit)) {
+        fpIndicator.setSize(sizeCount);
         return targetSizeAndOrientation;
       }
 
-      size++;
+      sizeCount++;
 
       String orientationBits = ByteUtil.toString(uap.get(index + 1)).substring(0, 7);
       int orientationValue = IntegerUtil.valueOf(ByteUtil.valueOf(orientationBits));
@@ -45,19 +44,19 @@ public class TargetSizeAndOrientationMapper {
       double orientation = DecimalUtil.multiply(orientationValue, resolution);
       targetSizeAndOrientation.setOrientation(orientation);
       String fx1Bit = ByteUtil.toString(uap.get(index + 1)).substring(7, 8);
-      if (zeroBit.equals(fx1Bit)) {
-        fpIndicator.setSize(size);
+      if (ByteUtil.ZERO_BIT.equals(fx1Bit)) {
+        fpIndicator.setSize(sizeCount);
         return targetSizeAndOrientation;
       }
 
-      size++;
+      sizeCount++;
 
       String widthBits = ByteUtil.toString(uap.get(index + 2)).substring(0, 7);
       int width = IntegerUtil.valueOf(ByteUtil.valueOf(widthBits));
       targetSizeAndOrientation.setWidth(width);
       String fx2Bit = ByteUtil.toString(uap.get(index + 2)).substring(7, 8);
-      if (zeroBit.equals(fx2Bit)) {
-        fpIndicator.setSize(size);
+      if (ByteUtil.ZERO_BIT.equals(fx2Bit)) {
+        fpIndicator.setSize(sizeCount);
         return targetSizeAndOrientation;
       }
     }
