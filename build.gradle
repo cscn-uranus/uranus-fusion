@@ -1,6 +1,7 @@
 plugins {
     id 'org.springframework.boot' version '2.1.3.RELEASE' apply false
     id "io.freefair.lombok" version "3.4.0" apply false
+
 }
 
 ext {
@@ -13,7 +14,6 @@ ext {
 allprojects {
     repositories {
         maven { url 'http://nexus.dizall.com/repository/maven-public/' }
-
     }
 }
 
@@ -22,6 +22,6 @@ subprojects {
     apply plugin: 'io.spring.dependency-management'
     sourceCompatibility = '1.8'
     targetCompatibility = '1.8'
-    group = 'com.uranus.fusion'
-    version = '0.0.1-SNAPSHOT'
+    group = 'com.uranus.transition'
+    version = '0.0.2-SNAPSHOT'
 }

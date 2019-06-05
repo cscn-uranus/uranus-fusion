@@ -7,8 +7,8 @@ pluginManagement {
 
 rootProject.name = 'uranus-fusion'
 
-include 'fusion-common'
-include 'transformer-cat062'
-include 'transformer-cat062-modesel'
-include 'transformer-cat048'
-include 'transformer-fdexm'
+include 'transition-common'
+include 'cat062-translator'
+include 'cat048-translator'
+include 'fdexm-translator'
+include 'flight-filter'

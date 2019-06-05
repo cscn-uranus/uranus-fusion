@@ -1,0 +1,46 @@
+server:
+  port: 9001
+
+spring:
+  cloud:
+    stream:
+      bindings:
+        cat062-transformer-input:
+          destination: uranus.proxy
+          group: indraCat062
+          content-type: application/octet-stream
+          binder: proxymq
+        cat062-transformer-output:
+          destination: uranus.fusion
+          group: indraFlightTrack
+          content-type: application/json
+          binder: fusionmq
+      rabbit:
+        bindings:
+          cat062-transformer-input:
+            consumer:
+              binding-routing-key: indraCat062
+          cat062-transformer-output:
+            producer:
+              routing-key-expression: "'indraFlightTrack'"
+      binders:
+        proxymq:
+          type: rabbit
+          defaultCandidate: false
+          environment:
+            spring:
+              rabbitmq:
+                host: proxy-mq.dizall.com
+                username: admin
+                password: Mf#llsy78g
+                port: 5672
+        fusionmq:
+          type: rabbit
+          defaultCandidate: false
+          environment:
+            spring:
+              rabbitmq:
+                host: fusion-mq.dizall.com
+                username: admin
+                password: Mf#llsy78g
+                port: 5672
