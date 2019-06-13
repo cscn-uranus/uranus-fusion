@@ -4,18 +4,16 @@ import com.uranus.transition.common.asterix.cat062.Cat062Config;
 import com.uranus.transition.common.asterix.spec.*;
 import com.uranus.transition.common.asterix.uap.track.DataAge;
 import com.uranus.transition.common.asterix.uap.track.status.TrackDataAge;
-import com.uranus.transition.common.asterix.cat062.dataage.sub.*;
 
 import java.util.List;
 
 /**
- * TrackDataAgeMapper
  *
  * @author 肖鹏 tellxp@github.com date 2018/11/9
  */
 public class TrackDataAgeMapper {
 
-  public static TrackDataAge read(List<Byte> uap, FieldSpec fieldSpec) {
+  public static TrackDataAge read(List<Byte> message, FieldSpec fieldSpec) {
 
     FpIndicator fpIndicator = fieldSpec.findFpIndicatorByFrn(Cat062Config.TRACK_DATA_AGES_FRN);
     if (fpIndicator.getIndication().equals(FpIndicationEnum.PRESENCE)) {
@@ -23,16 +21,17 @@ public class TrackDataAgeMapper {
 
       TrackDataAge trackDataAge = new TrackDataAge();
 
-      DataSpec dataSpec = new DataSpec(DataSpecTypeEnum.CAT062_TRACK_DATA_AGES);
-      dataSpec.readValue(uap, startIndex);
+      DataSpecParameter dataSpecParameter = new TrackDataAgeDataSpecParameter();
+      DataSpec dataSpec = new DataSpec(startIndex, dataSpecParameter);
+      dataSpec.readValue(message);
 
-      DataAge measuredFlightLevelAge = MeasuredFlightLevelDataAgeMapper.read(uap, dataSpec);
-      DataAge mode1Age = Mode1DataAgeMapper.read(uap, dataSpec);
-      DataAge mode2Age = Mode2DataAgeMapper.read(uap, dataSpec);
-      DataAge mode3Age = Mode3DataAgeMapper.read(uap, dataSpec);
-      DataAge mode4Age = Mode4DataAgeMapper.read(uap, dataSpec);
-      DataAge mode5Age = Mode5DataAgeMapper.read(uap, dataSpec);
-      DataAge magneticHeadingAge = MagneticHeadingDataAgeMapper.read(uap, dataSpec);
+      DataAge measuredFlightLevelAge = MeasuredFlightLevelDataAgeMapper.read(message, dataSpec);
+      DataAge mode1Age = Mode1DataAgeReader.read(message, dataSpec);
+      DataAge mode2Age = Mode2DataAgeReader.read(message, dataSpec);
+      DataAge mode3Age = Mode3DataAgeReader.read(message, dataSpec);
+      DataAge mode4Age = Mode4DataAgeReader.read(message, dataSpec);
+      DataAge mode5Age = Mode5DataAgeReader.read(message, dataSpec);
+      DataAge magneticHeadingAge = MagneticHeadingDataAgeReader.read(message, dataSpec);
       trackDataAge.setMeasuredFlightLevelAge(measuredFlightLevelAge);
       trackDataAge.setMode1Age(mode1Age);
       trackDataAge.setMode2Age(mode2Age);
@@ -41,15 +40,15 @@ public class TrackDataAgeMapper {
       trackDataAge.setMode5Age(mode5Age);
       trackDataAge.setMagneticHeadingAge(magneticHeadingAge);
 
-      DataAge airspeedAge = AirspeedDataAgeMapper.read(uap, dataSpec);
-      DataAge trueAirspeedAge = TrueAirspeedDataAgeMapper.read(uap, dataSpec);
-      DataAge selectedAltitudeAge = SelectedAltitudeDataAgeMapper.read(uap, dataSpec);
+      DataAge airspeedAge = AirspeedDataAgeReader.read(message, dataSpec);
+      DataAge trueAirspeedAge = TrueAirspeedDataAgeReader.read(message, dataSpec);
+      DataAge selectedAltitudeAge = SelectedAltitudeDataAgeReader.read(message, dataSpec);
       DataAge finalSelectedAltitudeAge =
-          FinalStateSelectedAltitudeDataAgeMapper.read(uap, dataSpec);
-      DataAge trajectoryIntentAge = TrajectoryIntentDataAgeMapper.read(uap, dataSpec);
+          FinalStateSelectedAltitudeDataAgeReader.read(message, dataSpec);
+      DataAge trajectoryIntentAge = TrajectoryIntentDataAgeReader.read(message, dataSpec);
       DataAge commAndStatusByModeSelectiveAge =
-          CommAndFlightStatusDataAgeMapper.read(uap, dataSpec);
-      DataAge statusByAdsbAge = StatusReportByAdsbDataAgeMapper.read(uap, dataSpec);
+          CommAndFlightStatusDataAgeReader.read(message, dataSpec);
+      DataAge statusByAdsbAge = StatusReportByAdsbDataAgeReader.read(message, dataSpec);
       trackDataAge.setAirspeedAge(airspeedAge);
       trackDataAge.setTrueAirspeedAge(trueAirspeedAge);
       trackDataAge.setSelectedAltitudeAge(selectedAltitudeAge);
@@ -58,13 +57,13 @@ public class TrackDataAgeMapper {
       trackDataAge.setCommAndStatusByModeSelectiveAge(commAndStatusByModeSelectiveAge);
       trackDataAge.setStatusByAdsBroadcastAge(statusByAdsbAge);
 
-      DataAge acasAdvisoryReportAge = AcasResolutionAdvisoryReportDataAgeMapper.read(uap, dataSpec);
-      DataAge barometricVerticalRateAge = BarometricVerticalRateDataAgeMapper.read(uap, dataSpec);
-      DataAge geometricalVerticalRateAge = GeometricalVerticalRateDataAgeMapper.read(uap, dataSpec);
-      DataAge rollAngleAge = RollAngleDataAgeMapper.read(uap, dataSpec);
-      DataAge trackAngleRateAge = TrackAngleRateDataAgeMapper.read(uap, dataSpec);
-      DataAge trackAngleAge = TrackAngleDataAgeMapper.read(uap, dataSpec);
-      DataAge groundSpeedAge = GroundSpeedDataAgeMapper.read(uap, dataSpec);
+      DataAge acasAdvisoryReportAge = AcasResolutionAdvisoryReportDataAgeReader.read(message, dataSpec);
+      DataAge barometricVerticalRateAge = BarometricVerticalRateDataAgeReader.read(message, dataSpec);
+      DataAge geometricalVerticalRateAge = GeometricalVerticalRateDataAgeReader.read(message, dataSpec);
+      DataAge rollAngleAge = RollAngleDataAgeReader.read(message, dataSpec);
+      DataAge trackAngleRateAge = TrackAngleRateDataAgeReader.read(message, dataSpec);
+      DataAge trackAngleAge = TrackAngleDataAgeReader.read(message, dataSpec);
+      DataAge groundSpeedAge = GroundSpeedDataAgeReader.read(message, dataSpec);
       trackDataAge.setAcasAdvisoryReportAge(acasAdvisoryReportAge);
       trackDataAge.setBarometricVerticalRateAge(barometricVerticalRateAge);
       trackDataAge.setGeometricalVerticalRateAge(geometricalVerticalRateAge);
@@ -73,13 +72,13 @@ public class TrackDataAgeMapper {
       trackDataAge.setTrackAngleAge(trackAngleAge);
       trackDataAge.setGroundSpeedAge(groundSpeedAge);
 
-      DataAge velocityUncertaintyAge = VelocityUncertaintyDataAgeMapper.read(uap, dataSpec);
-      DataAge metDataAge = MetDataAgeMapper.read(uap, dataSpec);
-      DataAge emitterCategoryAge = EmitterCategoryDataAgeMapper.read(uap, dataSpec);
-      DataAge positionAge = PositionDataAgeMapper.read(uap, dataSpec);
-      DataAge geometricAltitudeAge = GeometricAltitudeDataAgeMapper.read(uap, dataSpec);
-      DataAge positionUncertaintyAge = PositionUncertaintyDataAgeMapper.read(uap, dataSpec);
-      DataAge modeSelMbDataAge = ModeSelMbDataAgeMapper.read(uap, dataSpec);
+      DataAge velocityUncertaintyAge = VelocityUncertaintyDataAgeReader.read(message, dataSpec);
+      DataAge metDataAge = MetDataAgeReader.read(message, dataSpec);
+      DataAge emitterCategoryAge = EmitterCategoryDataAgeReader.read(message, dataSpec);
+      DataAge positionAge = PositionDataAgeReader.read(message, dataSpec);
+      DataAge geometricAltitudeAge = GeometricAltitudeDataAgeReader.read(message, dataSpec);
+      DataAge positionUncertaintyAge = PositionUncertaintyDataAgeReader.read(message, dataSpec);
+      DataAge modeSelMbDataAge = ModeselMbDataAgeReader.read(message, dataSpec);
       trackDataAge.setVelocityUncertaintyAge(velocityUncertaintyAge);
       trackDataAge.setMeteorologicalDataAge(metDataAge);
       trackDataAge.setEmitterCategoryAge(emitterCategoryAge);
@@ -88,10 +87,10 @@ public class TrackDataAgeMapper {
       trackDataAge.setPositionUncertaintyAge(positionUncertaintyAge);
       trackDataAge.setModeSelMbDataAge(modeSelMbDataAge);
 
-      DataAge indicatedAirspeedDataAge = IndicatedAirspeedDataAgeMapper.read(uap, dataSpec);
-      DataAge machNumberDataAge = MachNumberDataAgeMapper.read(uap, dataSpec);
+      DataAge indicatedAirspeedDataAge = IndicatedAirspeedDataAgeReader.read(message, dataSpec);
+      DataAge machNumberDataAge = MachNumberDataAgeReader.read(message, dataSpec);
       DataAge barometricPressureSettingDataAge =
-          BarometricPressureSettingDataAgeMapper.read(uap, dataSpec);
+          BarometricPressureSettingDataAgeReader.read(message, dataSpec);
       trackDataAge.setIndicatedAirspeedDataAge(indicatedAirspeedDataAge);
       trackDataAge.setMachNumberDataAge(machNumberDataAge);
       trackDataAge.setBarometricPressureSettingDataAge(barometricPressureSettingDataAge);

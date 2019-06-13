@@ -4,15 +4,13 @@ import com.uranus.transition.common.asterix.AsterixConfig;
 import com.uranus.transition.common.asterix.AsterixDataBlock;
 import com.uranus.transition.common.asterix.AsterixReader;
 import com.uranus.transition.common.asterix.AsterixUap;
-import com.uranus.transition.common.asterix.cat062.accuracy.EstimatedAccuracyMapper;
-import com.uranus.transition.common.asterix.cat062.aircraftdata.AircraftDerivedDataMapper;
+import com.uranus.transition.common.asterix.cat062.accuracy.EstimatedAccuracyReader;
+import com.uranus.transition.common.asterix.cat062.aircraftdata.AircraftDerivedDataReader;
 import com.uranus.transition.common.asterix.cat062.dataage.TrackDataAgeMapper;
 import com.uranus.transition.common.asterix.cat062.flightplan.FlightPlanRelatedDataMapper;
-import com.uranus.transition.common.asterix.cat062.measured.MeasuredInformationMapper;
-import com.uranus.transition.common.asterix.cat062.mode5.Mode5AndMode1Mapper;
-import com.uranus.transition.common.asterix.cat062.spec.Cat062FieldSpecParameter;
-import com.uranus.transition.common.asterix.cat062.sub.*;
-import com.uranus.transition.common.asterix.cat062.updateage.SystemTrackUpdateAgeMapper;
+import com.uranus.transition.common.asterix.cat062.measured.MeasuredInformationReader;
+import com.uranus.transition.common.asterix.cat062.mode5.Mode5AndMode1Reader;
+import com.uranus.transition.common.asterix.cat062.updateage.SystemTrackUpdateAgeReader;
 import com.uranus.transition.common.asterix.spec.FieldSpec;
 import com.uranus.transition.common.asterix.spec.FieldSpecParameter;
 import com.uranus.transition.common.asterix.spec.FpIndicationEnum;
@@ -48,77 +46,77 @@ public class Cat062Mapper {
     while (beginIndex < messageSize) {
       AsterixDataBlock asterixDataBlock = new AsterixDataBlock();
 
-      FieldSpec fieldSpec = AsterixReader.readFieldSpec(message, beginIndex, fieldSpecParameter);
+      FieldSpec fieldSpec = AsterixReader.read(message, beginIndex, fieldSpecParameter);
       if (!isValidCat062FieldSpec(fieldSpec)) {
         return null;
       }
       asterixDataBlock.setFieldSpec(fieldSpec);
 
-      asterixDataBlock.setSystemIdentification(DataSourceIdentifierMapper.read(message, fieldSpec));
+      asterixDataBlock.setSystemIdentification(DataSourceIdentifierReader.read(message, fieldSpec));
 
       asterixDataBlock.setServiceIdentification(
-          ServiceIdentificationMapper.read(message, fieldSpec));
+          ServiceIdentificationReader.read(message, fieldSpec));
 
-      asterixDataBlock.setTimeOfTrack(TimeOfTrackMapper.read(message, fieldSpec));
+      asterixDataBlock.setTimeOfTrack(TimeOfTrackReader.read(message, fieldSpec));
 
       asterixDataBlock.setWgs84Position(
-          Wgs84CalculatedTrackPositionMapper.read(message, fieldSpec));
+          Wgs84CalculatedTrackPositionReader.read(message, fieldSpec));
 
       asterixDataBlock.setCartesianPosition(
-          CartesianCalculatedTrackPositionMapper.read(message, fieldSpec));
+          CartesianCalculatedTrackPositionReader.read(message, fieldSpec));
 
       asterixDataBlock.setCartesianVelocity(
-          CartesianCalculatedTrackVelocityMapper.read(message, fieldSpec));
+          CartesianCalculatedTrackVelocityReader.read(message, fieldSpec));
 
       asterixDataBlock.setCartesianAcceleration(
-          CartesianCalculatedTrackAccelerationMapper.read(message, fieldSpec));
+          CartesianCalculatedTrackAccelerationReader.read(message, fieldSpec));
 
-      asterixDataBlock.setMode3Code(TrackMode3ACodeMapper.read(message, fieldSpec));
+      asterixDataBlock.setMode3Code(TrackMode3ACodeReader.read(message, fieldSpec));
 
-      asterixDataBlock.setTargetIdentification(TargetIdentificationMapper.read(message, fieldSpec));
+      asterixDataBlock.setTargetIdentification(TargetIdentificationReader.read(message, fieldSpec));
 
-      asterixDataBlock.setAircraftDerivedData(AircraftDerivedDataMapper.read(message, fieldSpec));
+      asterixDataBlock.setAircraftDerivedData(AircraftDerivedDataReader.read(message, fieldSpec));
 
-      asterixDataBlock.setTrackNumber(TrackNumberMapper.readTrackNumber(message, fieldSpec));
+      asterixDataBlock.setTrackNumber(TrackNumberReader.readTrackNumber(message, fieldSpec));
 
-      asterixDataBlock.setTrackStatus(TrackStatusMapper.readTrackStatus(message, fieldSpec));
+      asterixDataBlock.setTrackStatus(TrackStatusReader.readTrackStatus(message, fieldSpec));
 
-      asterixDataBlock.setSystemTrackUpdateAge(SystemTrackUpdateAgeMapper.read(message, fieldSpec));
+      asterixDataBlock.setSystemTrackUpdateAge(SystemTrackUpdateAgeReader.read(message, fieldSpec));
 
       asterixDataBlock.setModeOfMovement(
-          ModeOfMovementMapper.readModeOfMovement(message, fieldSpec));
+          ModeOfMovementReader.readModeOfMovement(message, fieldSpec));
 
       asterixDataBlock.setTrackDataAge(TrackDataAgeMapper.read(message, fieldSpec));
 
-      asterixDataBlock.setMeasuredFlightLevel(MeasuredFlightLevelMapper.read(message, fieldSpec));
+      asterixDataBlock.setMeasuredFlightLevel(MeasuredFlightLevelReader.read(message, fieldSpec));
 
       asterixDataBlock.setTrackGeometricAltitude(
-          CalculatedTrackGeometricAltitudeMapper.read(message, fieldSpec));
+          CalculatedTrackGeometricAltitudeReader.read(message, fieldSpec));
 
       asterixDataBlock.setTrackBarometricAltitude(
-          CalculatedTrackBarometricAltitudeMapper.read(message, fieldSpec));
+          CalculatedTrackBarometricAltitudeReader.read(message, fieldSpec));
 
       asterixDataBlock.setRateOfClimbOrDescent(
-          CalculatedRateOfClimbOrDescentMapper.read(message, fieldSpec));
+          CalculatedRateOfClimbOrDescentReader.read(message, fieldSpec));
 
       asterixDataBlock.setFlightPlanRelatedData(
           FlightPlanRelatedDataMapper.read(message, fieldSpec));
 
       asterixDataBlock.setTargetSizeAndOrientation(
-          TargetSizeAndOrientationMapper.read(message, fieldSpec));
+          TargetSizeAndOrientationReader.read(message, fieldSpec));
 
       asterixDataBlock.setVehicleFleetIdentification(
-          VehicleFleetIdentificationMapper.read(message, fieldSpec));
+          VehicleFleetIdentificationReader.read(message, fieldSpec));
 
-      asterixDataBlock.setMode5AndExtendedMode1(Mode5AndMode1Mapper.read(message, fieldSpec));
+      asterixDataBlock.setMode5AndExtendedMode1(Mode5AndMode1Reader.read(message, fieldSpec));
 
-      asterixDataBlock.setMode2Code(TrackMode2CodeMapper.read(message, fieldSpec));
+      asterixDataBlock.setMode2Code(TrackMode2CodeReader.read(message, fieldSpec));
 
-      asterixDataBlock.setComposedTrackNumber(ComposedTrackNumberMapper.read(message, fieldSpec));
+      asterixDataBlock.setComposedTrackNumber(ComposedTrackNumberReader.read(message, fieldSpec));
 
-      asterixDataBlock.setEstimatedAccuracy(EstimatedAccuracyMapper.read(message, fieldSpec));
+      asterixDataBlock.setEstimatedAccuracy(EstimatedAccuracyReader.read(message, fieldSpec));
 
-      asterixDataBlock.setMeasuredInformation(MeasuredInformationMapper.read(message, fieldSpec));
+      asterixDataBlock.setMeasuredInformation(MeasuredInformationReader.read(message, fieldSpec));
 
       beginIndex += fieldSpec.calculateCurrentDataBlockLength();
 

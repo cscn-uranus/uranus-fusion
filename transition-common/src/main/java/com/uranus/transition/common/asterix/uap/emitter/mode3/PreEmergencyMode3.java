@@ -11,6 +11,13 @@ import lombok.Data;
 @Data
 public class PreEmergencyMode3 {
 
+  /** bit-13
+   *
+   * (VA) Validity = 0 No valid Mode 3/A available = 1 Valid Mode 3/A available */
   private DataValidEnum dataValidEnum;
+
+  /** bits-12/1
+   *
+   * Mode-3/A reply in octal representation */
   private String code;
 }

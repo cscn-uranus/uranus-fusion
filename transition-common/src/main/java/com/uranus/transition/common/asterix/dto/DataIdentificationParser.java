@@ -18,7 +18,7 @@ public class DataIdentificationParser {
     }
 
     if (null != asterixDataBlock.getServiceIdentification()) {
-      dataIdentificationDTO.setSi(asterixDataBlock.getServiceIdentification().getIdentifier());
+      dataIdentificationDTO.setSi(asterixDataBlock.getServiceIdentification().getIdentification());
     }
     return dataIdentificationDTO;
   }

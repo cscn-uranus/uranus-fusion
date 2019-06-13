@@ -10,5 +10,9 @@ import lombok.Data;
 @Data
 public class WakeTurbulenceCategory {
 
+  /**
+   * bits 8/1 Wake Turbulence Category is an ASCII character code which should be one of the
+   * following values: L = Light M = Medium H = Heavy J = “Super”
+   */
   private String category;
 }

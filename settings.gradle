@@ -10,5 +10,7 @@ rootProject.name = 'uranus-fusion'
 include 'transition-common'
 include 'cat062-translator'
 include 'cat048-translator'
+include 'ccat003-translator'
+
 include 'fdexm-translator'
 include 'flight-filter'

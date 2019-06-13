@@ -3,7 +3,6 @@ package com.uranus.transition.common.asterix.spec;
 import com.uranus.transition.common.util.ByteUtil;
 import lombok.Data;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,10 +10,11 @@ import java.util.Map;
 /**
  * FieldSpec
  *
- * @author 肖鹏 tellxp@github.com date 2018/10/16
+ * @author 肖鹏 tellxp@github.com
+ * @date 2018/10/16
  */
 @Data
-public class FieldSpec implements Serializable {
+public class FieldSpec {
 
   private Integer beginIndex;
   private Integer size;
@@ -40,7 +40,7 @@ public class FieldSpec implements Serializable {
     this.defaultFpIndication = fieldSpecParameter.defaultFpIndication();
     this.defaultFpIndicatorSize = fieldSpecParameter.defaultFpIndicatorSize();
     this.frnStartNumber = fieldSpecParameter.frnStartNumber();
-    this.frnOctetSize = fieldSpecParameter.frnOctetSize();
+    this.frnOctetSize = fieldSpecParameter.frnStepSize();
 
     this.maxFxn = fieldSpecParameter.maxFxn();
     this.defaultFxIndication = fieldSpecParameter.defaultFxIndication();

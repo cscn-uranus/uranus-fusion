@@ -6,6 +6,12 @@ package com.uranus.transition.common.fdexm.dto;
  */
 
 public enum  PositiveEnum {
+  /**
+   * YES
+   */
   Y,
+  /**
+   * NO
+   */
   N
 }

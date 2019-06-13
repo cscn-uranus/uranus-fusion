@@ -6,7 +6,12 @@ package com.uranus.transition.common.asterix.uap.emitter.mode3;
  * @author 肖鹏 tellxp@github.com date 2018/10/24
  */
 public enum CodeGarbledStatusEnum {
-  // Code garbled
+  /**
+   * Default
+   */
   DEFAULT,
+  /**
+   * Garbled code
+   */
   GARBLED
 }

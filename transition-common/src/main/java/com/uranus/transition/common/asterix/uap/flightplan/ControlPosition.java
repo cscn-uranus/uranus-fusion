@@ -10,6 +10,11 @@ import lombok.Data;
 @Data
 public class ControlPosition {
 
+  /**
+   * bits 16/9 (Centre) 8-bit group Identification code
+   */
   private String centreCode;
+
+  /** bits 8/1 (Position) 8-bit Control Position identification code */
   private String positionCode;
 }

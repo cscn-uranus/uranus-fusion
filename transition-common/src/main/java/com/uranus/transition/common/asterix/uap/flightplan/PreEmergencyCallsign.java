@@ -10,5 +10,11 @@ import lombok.Data;
 @Data
 public class PreEmergencyCallsign {
 
+  /**
+   * NOTES 1. Each one of the seven Octets contains an ASCII Character. The Callsign is always left
+   * adjusted. It contains up to seven upper-case alphanumeric characters, the remaining character
+   * positions (if any) are padded with space characters 2. This subfield is used only when an
+   * emergency Mode 3/A is associated with the track (I062/390 Subfield #17)
+   */
   private String sign;
 }

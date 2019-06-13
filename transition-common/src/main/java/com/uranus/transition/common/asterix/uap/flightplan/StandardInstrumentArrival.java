@@ -10,5 +10,10 @@ import lombok.Data;
 @Data
 public class StandardInstrumentArrival {
 
+  /**
+   * NOTE - Each one of the seven Octets contains an ASCII Character. The STAR is always left
+   * adjusted. It contains up to seven alphanumeric characters, the remaining character positions
+   * (if any) are padded with space characters.
+   */
   private String procedure;
 }

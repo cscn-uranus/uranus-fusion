@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author 肖鹏 tellxp@github.com date 2018/11/12
  */
-public class TimeOfDepartureOrArrivalMapper {
+ class TimeOfDepartureOrArrivalMapper {
 
   public static FlightPlanTimeData read(List<Byte> uap, DataSpec dataSpec) {
     DpIndicator dpIndicator =

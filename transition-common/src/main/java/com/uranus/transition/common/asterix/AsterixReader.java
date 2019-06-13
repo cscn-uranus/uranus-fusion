@@ -24,7 +24,7 @@ public class AsterixReader {
         message.get(AsterixConfig.ASTERIX_LENGTH_INDEX + AsterixConfig.ASTERIX_LENGTH_SIZE - 1));
   }
 
-  public static FieldSpec readFieldSpec(
+  public static FieldSpec read(
       List<Byte> message, int beginIndex, FieldSpecParameter fieldSpecParameter) {
     FieldSpec fieldSpec = new FieldSpec(beginIndex, fieldSpecParameter);
 
