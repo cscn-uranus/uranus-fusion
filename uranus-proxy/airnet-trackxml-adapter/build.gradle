@@ -1,0 +1,59 @@
+buildscript {
+    ext {
+        springBootVersion = '2.0.0.RELEASE'
+    }
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/central/' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/gradle-plugin/' }
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'maven'
+
+bootJar {
+    group = 'com.uranus.proxy'
+    baseName = "proxy-trackxml"
+    version = "0.1.0"
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    maven { url 'http://maven.aliyun.com/nexus/content/repositories/central/' }
+    maven { url 'http://maven.aliyun.com/nexus/content/repositories/gradle-plugin/' }
+    mavenLocal()
+    mavenCentral()
+
+}
+ext {
+    springCloudVerison = 'Finchley.RELEASE'
+}
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVerison}"
+    }
+}
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-integration")
+    compile("org.springframework.integration:spring-integration-ip")
+    compile('org.springframework.cloud:spring-cloud-starter-stream-rabbit')
+    compile "org.springframework.boot:spring-boot-configuration-processor"
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.springframework.cloud:spring-cloud-stream-test-support')
+}
+
+
+
+
+

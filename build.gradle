@@ -1,14 +1,13 @@
 plugins {
     id 'org.springframework.boot' version '2.1.3.RELEASE' apply false
     id "io.freefair.lombok" version "3.4.0" apply false
-
 }
 
 ext {
     set('springBootVersion', '2.1.3.RELEASE')
     set('springCloudVersion', 'Greenwich.SR1')
     set('guavaVersion', 'guava:27.1-jre')
-    set('fasterxmlVersion','2.9.8')
+    set('fasterxmlVersion', '2.9.8')
 }
 
 allprojects {
@@ -18,10 +17,6 @@ allprojects {
 }
 
 subprojects {
-    apply plugin: 'java'
-    apply plugin: 'io.spring.dependency-management'
-    sourceCompatibility = '1.8'
-    targetCompatibility = '1.8'
-    group = 'com.uranus.transition'
-    version = '0.0.2-SNAPSHOT'
+    group = 'com.uranus'
+    version = '0.0.1-SNAPSHOT'
 }

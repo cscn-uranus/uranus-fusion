@@ -1,0 +1,6 @@
+rootProject.name = 'uranus-toolkit'
+
+include 'rabbit-activemq-forwarder'
+include 'toolkit-test'
+include 'udp-multi-uni'
+include 'udp-uni-rabbit'

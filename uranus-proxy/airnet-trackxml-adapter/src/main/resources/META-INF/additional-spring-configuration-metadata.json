@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "uranus.tps.proxy.trackxml.udp.port",
+      "type": "java.lang.String",
+      "description": "Description for uranus.tps.proxy.trackxml.udp.port."
+  }
+] }

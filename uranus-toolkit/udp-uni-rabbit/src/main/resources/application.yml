@@ -1,0 +1,24 @@
+uranus:
+  host: 172.28.1.2
+  port: 20001
+
+server:
+  port: 20100
+
+spring:
+  rabbitmq:
+    host: proxy-mq.dizall.com
+    username: admin
+    password: Mf#llsy78g
+    port: 5672
+  cloud:
+    stream:
+      bindings:
+        bridge-output:
+          destination: uranus.proxy
+          content-type: application/octet-stream
+      rabbit:
+        bindings:
+          bridge-output:
+            producer:
+              routing-key-expression: "'indraCat062'"

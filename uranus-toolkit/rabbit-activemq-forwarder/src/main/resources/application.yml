@@ -1,0 +1,33 @@
+forwarder:
+  queue: URANUS.TEST
+server:
+  port: 9001
+
+spring:
+  activemq:
+    broker-url: #activemq.ip#
+    user: CNCDEV
+    password: 123456;q
+    pool:
+      enabled: true
+      max-connections: 100
+  jms:
+    pub-sub-domain: true
+  rabbitmq:
+    host: proxy-mq.dizall.com
+    username: admin
+    password: Mf#llsy78g
+    port: 5672
+  cloud:
+    stream:
+      bindings:
+        rabbit-in:
+          destination: uranus.fusion
+          group: cscFlight
+          content-type: text/plain
+      rabbit:
+        bindings:
+          rabbit-in:
+            consumer:
+              binding-routing-key: cscFlight
+

@@ -1,0 +1,6 @@
+rootProject.name = 'uranus-proxy'
+include 'adc-mq-adapter'
+include 'airnet-fdexm-adapter'
+include 'airnet-trackxml-adapter'
+include 'indra-cat062-adapter'
+include 'sw-cat062-adapter'
