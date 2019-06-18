@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SData>
+    <DataSource>SWB</DataSource>
+    <DataType>Radar</DataType>
+    <TimeStamp>20190402141750</TimeStamp>
+    <PositionReport>
+        <TRACKID>277</TRACKID>
+        <CallSign>CHH7858</CallSign>
+        <REGID></REGID>
+        <RSPID>4204</RSPID>
+        <GroudSpeed>612</GroudSpeed>
+        <Height>453</Height>
+        <Altitude>453</Altitude>
+        <LONGITUDE>1094345</LONGITUDE>
+        <LATITUDE>334606</LATITUDE>
+        <Vector>299</Vector>
+        <VerticalRate>-1046</VerticalRate>
+    </PositionReport>
+</SData>
