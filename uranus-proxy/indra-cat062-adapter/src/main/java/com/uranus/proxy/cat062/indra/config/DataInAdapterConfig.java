@@ -50,7 +50,7 @@ public class DataInAdapterConfig {
     adapter.setReceiveBufferSize(256);
     adapter.setOutputChannel(inboundChannel());
     adapter.setSoTimeout(20);
-    logger.info("cat062 udp 接口->spring integration配置完成!");
+    logger.info("eucat062 udp 接口->spring integration配置完成!");
     return adapter;
   }
 

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public interface ProxyChannel {
 
-  String OUTPUT = "proxy-cat062-indra-output";
+  String OUTPUT = "proxy-eucat062-indra-output";
 
   @Output(OUTPUT)
   MessageChannel indraCat062();

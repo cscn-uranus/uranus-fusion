@@ -1,0 +1,55 @@
+
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
+apply plugin: 'io.freefair.lombok'
+apply plugin: 'maven-publish'
+apply plugin: 'io.spring.dependency-management'
+
+
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    implementation 'org.springframework.boot:spring-boot-starter-integration'
+
+    implementation "com.google.guava:${guavaVersion}"
+
+    implementation "com.fasterxml.jackson.core:jackson-databind:${fasterxmlVersion}"
+    implementation "com.fasterxml.jackson.module:jackson-module-parameter-names:${fasterxmlVersion}"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:${fasterxmlVersion}"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${fasterxmlVersion}"
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${fasterxmlVersion}"
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
+}
+
+dependencyManagement {
+    imports {
+        mavenBom SpringBootPlugin.BOM_COORDINATES
+    }
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId project.group
+            artifactId project.name
+            version project.version
+            //若是war包，就写components.web,若是jar包，就写components.java
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            def releasesRepoUrl = "http://nexus.dizall.com/repository/maven-releases/"
+            def snapshotsRepoUrl = "http://nexus.dizall.com/repository/maven-snapshots/"
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+            credentials {
+                username 'admin'
+                password 'Mf#llsy78g'
+            }
+        }
+    }
+}

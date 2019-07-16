@@ -3,7 +3,6 @@ package com.uranus.transition.common.fdexm.dto.brwy;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.uranus.transition.common.fdexm.dto.brwy.RunwayDTO;
 import lombok.Data;
 
 import java.time.LocalTime;

@@ -1,8 +1,12 @@
+pluginManagement {
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+    }
+}
 rootProject.name = 'uranus-transition'
 
-//include 'cat048-translator'
-//include 'cat062-translator'
-//include 'ccat003-translator'
-//include 'fdexm-translator'
-//include 'transition-common'
-
+include 'eucat048-translator'
+include 'eucat062-translator'
+include 'cncat003-translator'
+include 'fdexm-translator'
+include 'transition-common'

@@ -1,3 +1,4 @@
 rootProject.name = 'uranus-service'
+
 include 'flight-filter'
 

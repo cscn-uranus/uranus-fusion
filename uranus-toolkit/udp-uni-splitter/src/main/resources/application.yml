@@ -1,0 +1,31 @@
+server:
+  port: 9000
+
+uranus:
+  udp:
+    unicast:
+      splitter:
+        inbound:
+          local-address: 192.168.2.195
+          port: 50000
+          pool-size: 128
+          buffer-size: 10240
+        outbounds:
+          fdexm-cncdev:
+            host: 192.168.2.195
+            local-address: 192.168.2.195
+            port: 20000
+            enabled: true
+          fdexm-adcc:
+            host: 192.168.2.195
+            local-address: 192.168.2.195
+            port: 20001
+            enabled: true
+          fdexm-xxx:
+            host: 192.168.2.195
+            local-address: 192.168.2.195
+            port: 20002
+            enabled: false
+
+logging:
+  config: classpath:logback-spring.xml

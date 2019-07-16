@@ -42,18 +42,18 @@ public class InAdapterConfig {
 
   @Bean(name = "cat62InAdapter")
   public UnicastReceivingChannelAdapter udpInAdapter() {
-    logger.info("cat062 udp端口号为:" + this.cat62InIP);
+    logger.info("eucat062 udp端口号为:" + this.cat62InIP);
     UnicastReceivingChannelAdapter adapter = new UnicastReceivingChannelAdapter(this.cat62InPort);
     adapter.setReceiveBufferSize(8192);
     adapter.setOutputChannel(inboundChannel());
-    logger.info("cat062 udp接口->spring integration配置完成!");
+    logger.info("eucat062 udp接口->spring integration配置完成!");
     return adapter;
   }
 
   @Bean
   public UnicastSendingMessageHandler udpSendingAdapter() {
     logger.info(
-        "cat062 udp 转发器配置完成, 对端IP为:"
+        "eucat062 udp 转发器配置完成, 对端IP为:"
             + this.cat62OutIP
             + "| 对端port为:"
             + this.cat62OutPort.toString());

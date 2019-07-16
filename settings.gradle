@@ -1,33 +1,14 @@
-
-pluginManagement {
-    repositories {
-        maven { url 'http://nexus.dizall.com/repository/maven-public/' }
-//        maven { url 'https://plugins.gradle.org/m2/' }
-    }
-}
-
 rootProject.name = 'uranus-fdp'
 
 // Toolkit
-include 'uranus-toolkit:rabbit-activemq-forwarder'
-include 'uranus-toolkit:toolkit-test'
-include 'uranus-toolkit:udp-multi-uni'
-include 'uranus-toolkit:udp-uni-rabbit'
+includeBuild 'uranus-toolkit'
 
 // Proxy 层
-
-include 'uranus-proxy:adc-mq-adapter'
-include 'uranus-proxy:airnet-fdexm-adapter'
-include 'uranus-proxy:airnet-trackxml-adapter'
-include 'uranus-proxy:indra-cat062-adapter'
-include 'uranus-proxy:sw-cat062-adapter'
+includeBuild 'uranus-proxy'
 
 // Transition 层
-include 'uranus-transition:cat048-translator'
-include 'uranus-transition:cat062-translator'
-include 'uranus-transition:ccat003-translator'
-include 'uranus-transition:fdexm-translator'
-include 'uranus-transition:transition-common'
+includeBuild 'uranus-transition'
+
 
 // Service 层
-include 'uranus-service:flight-filter'
+includeBuild 'uranus-service'

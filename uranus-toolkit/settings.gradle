@@ -1,6 +1,12 @@
+pluginManagement {
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+    }
+}
 rootProject.name = 'uranus-toolkit'
-
+include 'toolkit-common'
 include 'rabbit-activemq-forwarder'
 include 'toolkit-test'
-include 'udp-multi-uni'
+include 'udp-multi-splitter'
+include 'udp-uni-splitter'
 include 'udp-uni-rabbit'

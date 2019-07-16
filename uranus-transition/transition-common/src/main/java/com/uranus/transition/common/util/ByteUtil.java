@@ -1,5 +1,6 @@
 package com.uranus.transition.common.util;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,20 +16,20 @@ public final class ByteUtil {
   public static final String ONE_BIT = "1";
   public static final Integer BITS_OF_BYTE = 8;
 
-  public static String toString(Byte singleByte) {
-    return String.valueOf((singleByte >> 7) & 0x1)
-        + ((singleByte >> 6) & 0x1)
-        + ((singleByte >> 5) & 0x1)
-        + ((singleByte >> 4) & 0x1)
-        + ((singleByte >> 3) & 0x1)
-        + ((singleByte >> 2) & 0x1)
-        + ((singleByte >> 1) & 0x1)
-        + ((singleByte) & 0x1);
+  public static String toString(Byte octet) {
+    return String.valueOf((octet >> 7) & 0x1)
+        + ((octet >> 6) & 0x1)
+        + ((octet >> 5) & 0x1)
+        + ((octet >> 4) & 0x1)
+        + ((octet >> 3) & 0x1)
+        + ((octet >> 2) & 0x1)
+        + ((octet >> 1) & 0x1)
+        + ((octet) & 0x1);
   }
 
-  public static String toString(List<Byte> bytes) {
+  public static String toString(List<Byte> octets) {
     StringBuilder bitStringBuilder = new StringBuilder();
-    for (Byte byteItem : bytes) {
+    for (Byte byteItem : octets) {
       bitStringBuilder.append(toString(byteItem));
     }
     return bitStringBuilder.toString();
@@ -50,39 +51,15 @@ public final class ByteUtil {
     return Integer.valueOf(complementBitsBuilder.toString() + bitString, 2).byteValue();
   }
 
-  public static String getBitByIndex(Byte singleByte, int index) {
-    return toString(singleByte).substring(index, index + 1);
+  public static String getBitByIndex(Byte octet, int index) {
+    return toString(octet).substring(index, index + 1);
   }
 
-  public static String getB0(Byte singleByte) {
-    return toString(singleByte).substring(0, 1);
-  }
-
-  public static String getB1(Byte singleByte) {
-    return toString(singleByte).substring(1, 2);
-  }
-
-  public static String getB2(Byte singleByte) {
-    return toString(singleByte).substring(2, 3);
-  }
-
-  public static String getB3(Byte singleByte) {
-    return toString(singleByte).substring(3, 4);
-  }
-
-  public static String getB4(Byte singleByte) {
-    return toString(singleByte).substring(4, 5);
-  }
-
-  public static String getB5(Byte singleByte) {
-    return toString(singleByte).substring(5, 6);
-  }
-
-  public static String getB6(Byte singleByte) {
-    return toString(singleByte).substring(6, 7);
-  }
-
-  public static String getB7(Byte singleByte) {
-    return toString(singleByte).substring(7, 8);
+  public static List<Byte> asList(byte[] octets) {
+    List<Byte> byteList = new ArrayList<>();
+    for (byte octet: octets) {
+      byteList.add(octet);
+    }
+    return byteList;
   }
 }

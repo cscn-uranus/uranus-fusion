@@ -9,7 +9,7 @@ dependencies {
 
     implementation "com.google.guava:${guavaVersion}"
 
-    implementation project(':uranus-transition:transition-common')
+    implementation project(':transition-common')
 }
 
 dependencyManagement {

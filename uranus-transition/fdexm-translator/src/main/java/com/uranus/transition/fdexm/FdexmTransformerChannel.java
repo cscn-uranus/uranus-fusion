@@ -7,7 +7,6 @@ import org.springframework.messaging.SubscribableChannel;
 import org.springframework.stereotype.Component;
 
 /**
- * FdexmTransformerChannel
  *
  * @author tellxp@github.com
  * @date 2018/11/23

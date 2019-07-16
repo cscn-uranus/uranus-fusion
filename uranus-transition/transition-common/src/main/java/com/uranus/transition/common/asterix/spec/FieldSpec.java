@@ -164,40 +164,6 @@ public class FieldSpec {
 
   public void read(List<Byte> message) {
 
-    int sizeCount = 0;
-    int currentIndex = beginIndex;
 
-    for (int i = 0; i < this.maxFxn; i++) {
-      Byte fieldSpecificationOctet = message.get(currentIndex);
-      for (int j = 0; j < frnStepSize; j++) {
-        // set f1-f7
-        int frn = i * frnStepSize + j + frnStartNumber;
-        String fpIndicatorIndicationBit = ByteUtil.getBitByIndex(fieldSpecificationOctet, j);
-
-        FpIndicator fpIndicator = fpIndicatorMap.get(frn);
-        fpIndicator.setIndication(
-            ByteUtil.ZERO_BIT.equals(fpIndicatorIndicationBit)
-                ? FpIndicationEnum.ABSENCE
-                : FpIndicationEnum.PRESENCE);
-      }
-
-      String fxn = fxPrefix + (i + fxnStartNumber);
-      String fxIndicatorIndicationBit =
-          ByteUtil.getBitByIndex(fieldSpecificationOctet, fxnOctetIndex);
-
-      FxIndicator fxIndicator = fxIndicatorMap.get(fxn);
-      fxIndicator.setIndication(
-          ByteUtil.ZERO_BIT.equals(fxIndicatorIndicationBit)
-              ? FxIndicationEnum.END
-              : FxIndicationEnum.EXTENSION);
-
-      sizeCount++;
-      currentIndex++;
-      this.size = sizeCount;
-
-      if (fxIndicator.getIndication().equals(FxIndicationEnum.END)) {
-        break;
-      }
-    }
   }
 }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.uranus.transition.common.fdexm.dto.PositiveEnum;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -44,6 +45,7 @@ public class IfplDTO {
    */
   @JsonProperty(value = "FILTIM")
   @JsonFormat(pattern = "HHmmss")
+  @EqualsAndHashCode.Exclude
   private LocalTime sendingTime;
 
   /**
@@ -64,6 +66,7 @@ public class IfplDTO {
    * <p>示例： -SOURCEMSGID 139942324
    */
   @JsonProperty(value = "SOURCEMSGID")
+  @EqualsAndHashCode.Exclude
   private String sourceMessageId;
 
   /**
@@ -76,6 +79,7 @@ public class IfplDTO {
    * <p>详见国标“MH/T 4029.3-2015” 第16页43行
    */
   @JsonProperty(value = "IFPLID")
+  @EqualsAndHashCode.Exclude
   private String ifplId;
 
   /**
@@ -90,7 +94,8 @@ public class IfplDTO {
    * <p>详见国标“MH/T 4029.3-2015” 第18页64行
    */
   @JsonProperty(value = "RTEPTS")
-  private List<RoutePointDTO> routePointDTOS;
+  @EqualsAndHashCode.Exclude
+  private List<RoutePointDTO> routePoints;
 
   /**
    * 航空器标识(航空器注册码或航班号)

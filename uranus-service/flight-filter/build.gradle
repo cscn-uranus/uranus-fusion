@@ -17,7 +17,7 @@ dependencies {
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
-    implementation project(':uranus-transition:transition-common')
+    implementation "com.uranus.fdp.transition:transition-common:${transitionCommonVersion}"
 }
 
 dependencyManagement {

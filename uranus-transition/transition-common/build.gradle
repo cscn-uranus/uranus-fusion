@@ -1,8 +1,9 @@
-import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 apply plugin: 'io.freefair.lombok'
 apply plugin: 'maven-publish'
+apply plugin: 'io.spring.dependency-management'
 
 
 dependencies {

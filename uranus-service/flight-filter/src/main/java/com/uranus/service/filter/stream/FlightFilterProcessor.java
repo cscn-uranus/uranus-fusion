@@ -1,6 +1,6 @@
 package com.uranus.service.filter.stream;
 
-import com.uranus.transition.common.asterix.dto.FlightDTO;
+import com.uranus.transition.common.dto.FlightDTO;
 import com.uranus.transition.common.util.JacksonUtil;
 import com.uranus.service.filter.config.FlightFilterProperties;
 import lombok.extern.slf4j.Slf4j;

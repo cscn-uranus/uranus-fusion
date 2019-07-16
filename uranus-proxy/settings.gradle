@@ -1,6 +1,12 @@
+pluginManagement {
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+    }
+}
 rootProject.name = 'uranus-proxy'
+
 include 'adc-mq-adapter'
 include 'airnet-fdexm-adapter'
 include 'airnet-trackxml-adapter'
-include 'indra-cat062-adapter'
-include 'sw-cat062-adapter'
+include 'indra-eucat062-adapter'
+include 'sw-eucat062-adapter'

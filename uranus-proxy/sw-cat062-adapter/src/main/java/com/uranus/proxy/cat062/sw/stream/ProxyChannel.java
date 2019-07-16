@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public interface ProxyChannel {
 
-  String OUTPUT = "cat062-proxy-output";
+  String OUTPUT = "eucat062-proxy-output";
 
   @Output(OUTPUT)
   MessageChannel cat62();
